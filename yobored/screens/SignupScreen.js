@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
-import { Text, Button } from "react-native-elements";
+import { Text, Button, Input } from "react-native-elements";
 import { Context as AuthContext } from "../context/AuthContext";
 import { TextInput } from "react-native-gesture-handler";
 
@@ -8,6 +8,7 @@ const SignupScreen = ({ navigation }) => {
   const { state, signup } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmpassword, setConfirmPassword] = useState("");
 
   return (
     <View style={styles.container}>
@@ -43,8 +44,8 @@ const SignupScreen = ({ navigation }) => {
         <TextInput
           secureTextEntry
           style={styles.textInput}
-          value={password}
-          onChangeText={setPassword}
+          value={confirmpassword}
+          onChangeText={setConfirmPassword}
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Confirm password"
@@ -57,6 +58,7 @@ const SignupScreen = ({ navigation }) => {
             titleStyle={{
               color: "blue",
             }}
+            onPress={() => signup({ username, password })}
           ></Button>
         </View>
       </View>

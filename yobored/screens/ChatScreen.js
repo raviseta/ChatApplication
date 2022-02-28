@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import {
   SafeAreaView,
   View,
@@ -56,14 +56,20 @@ const Item = ({ userName, profileImage, message, time }) => (
   </View>
 );
 
-const ChatScreen = () => {
+const ChatScreen = (props) => {
   const renderItem = ({ item }) => (
-    <Item
-      profileImage={item.profileImage}
-      userName={item.userName}
-      message={item.message}
-      time={item.time}
-    />
+    <TouchableOpacity
+      onPress={() => {
+        props.navigation.navigate({ routeName: "conversation" });
+      }}
+    >
+      <Item
+        profileImage={item.profileImage}
+        userName={item.userName}
+        message={item.message}
+        time={item.time}
+      />
+    </TouchableOpacity>
   );
 
   return (
@@ -75,6 +81,12 @@ const ChatScreen = () => {
       />
     </SafeAreaView>
   );
+};
+
+ChatScreen.navigationOptions = () => {
+  return {
+    headerShown: true,
+  };
 };
 
 const styles = StyleSheet.create({
